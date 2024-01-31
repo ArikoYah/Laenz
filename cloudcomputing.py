@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import streamlit as st
 
 # Header
-st.header('Nugroho :sparkles :')
+st.header('Nugroho :sparkles:')
 st.subheader('Plot')
 
 x = np.linspace(-2 * np.pi, 2 * np.pi,1000)
