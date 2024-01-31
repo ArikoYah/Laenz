@@ -24,7 +24,7 @@ st.pyplot(fig)
 # subheader
 st.subheader("Plot Sin & Cos")
 
-col1,col2 = st.coloumns(2)
+col1,col2 = st.columns(2)
 
 with col1:
   st.caption('Plot Sin')
