@@ -26,7 +26,7 @@ st.subheader("Plot Sin & Cos")
 
 col1,col2 = st.coloumn(2)
 
-  with col1:
+with col1:
   st.caption('Plot Sin')
   x = np.linspace(-2 * np.pi, 2 * np.pi, 1000) # Generating x values from -2*pi to 2*pi
   y = np.sin(x) # Calculating sin(x) values
