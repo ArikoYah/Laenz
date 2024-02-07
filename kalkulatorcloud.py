@@ -2,12 +2,12 @@ import streamlit as st
 
 # Header
 st.header('Nugroho :sparkles:')
-st.subheader('Plot')
+st.subheader('Kalkulator')
 
 c1, c2, c3 = st.columns(3)
 
 with c1:
-    x = st.number_input('Masukkan angka pertama:', value=100)
+    x = st.number_input('angka pertama:', value=100)
     st.write('=>: ')
 
 with c2:
@@ -15,7 +15,7 @@ with c2:
     st.write(':sparkle:')
 
 with c3:
-    y = st.number_input('Masukkan angka kedua:', value=1)
+    y = st.number_input('angka kedua:', value=1)
 
 # Operasi matematika dan penampilan hasil
 with st.expander('Hasil'):
