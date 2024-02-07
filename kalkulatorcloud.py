@@ -4,32 +4,33 @@ import streamlit as st
 st.header('Nugroho :sparkles:')
 st.subheader('Plot')
 
-c1, c2 = st.columns(2)
+c1, c2, c3 = st.columns(3)
 
 with c1:
-    x = st.number_input('Masukkan angka:', value=100)
+    x = st.number_input('Masukkan angka pertama:', value=100)
     st.write('=>: ')
 
 with c2:
-    satuan = st.selectbox('Satuan', ('+', '-', 'x', ':'), key='k1')
+    satuan = st.selectbox('Operasi Matematika:', ('+', '-', 'x', ':'), key='k1')
     st.write(':sparkle:')
-    st.write(x, satuan, '=', end=' ')
 
-# Operasi matematika
-if satuan == '+':
-    y = st.number_input('Masukkan angka kedua:', value=0)
-    st.write(x + y)
-elif satuan == '-':
-    y = st.number_input('Masukkan angka kedua:', value=0)
-    st.write(x - y)
-elif satuan == 'x':
+with c3:
     y = st.number_input('Masukkan angka kedua:', value=1)
-    st.write(x * y)
-elif satuan == ':':
-    y = st.number_input('Masukkan angka kedua (tidak boleh nol):', value=1)
-    if y != 0:
-        st.write(x / y)
-    else:
-        st.write("Tidak bisa melakukan pembagian dengan nol")
+
+# Operasi matematika dan penampilan hasil
+with st.expander('Hasil'):
+    if satuan == '+':
+        result = x + y
+    elif satuan == '-':
+        result = x - y
+    elif satuan == 'x':
+        result = x * y
+    elif satuan == ':':
+        if y != 0:
+            result = x / y
+        else:
+            result = "Tidak bisa melakukan pembagian dengan nol"
+
+    st.write(f'Hasil dari {x} {satuan} {y} adalah: {result}')
 
 st.caption('Copyright @ Ariko Yahya 2024')
