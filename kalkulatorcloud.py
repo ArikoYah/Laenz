@@ -7,7 +7,7 @@ st.subheader('Plot')
 c1, c2 = st.columns(2)
 
 with c1:
-  x = st.nimber_input('',value=100)
+  x = st.number_input('',value=100)
   st.write('=>: ')
   with c2:
     satuan = st.selectbox(
