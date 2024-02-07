@@ -30,5 +30,5 @@ with st.expander('Hasil'):
             result = x / y
         else:
             result = "Tidak bisa melakukan pembagian dengan nol"
-
+ st.write(f'Hasil dari {x} {satuan} {y} adalah: {result}')
 st.caption('Copyright @ Ariko Yahya 2024')
