@@ -15,3 +15,4 @@ with c1:
       ('+','-','x',':'),key='k1')
     st.write(':sparkle:')
     st.write(x,'',satuan,'=','')
+st.caption('Copyright @ Ariko Yahya 2024')
