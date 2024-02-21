@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import streamlit as st
-from scipy.integrate import quad
+
 
 # Definisi fungsi
 def f(x):
