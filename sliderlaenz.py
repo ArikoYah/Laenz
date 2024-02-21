@@ -22,8 +22,12 @@ st.write('### Nilai x')
 x_range = st.slider('Rentang nilai x', -20.0, 5.0, (-20.0, 5.0))
 st.write('Rentang nilai x:', x_range)
 
-# Slider untuk memilih jumlah segmen trapesium
+# Slider untuk memilih rentang integral
 st.write('### Nilai Integral')
+integral_range = st.slider('Rentang Integral', -1000.0, 1000.0, (-100.0, 100.0))
+st.write('Rentang Integral:', integral_range)
+
+# Slider untuk memilih jumlah segmen trapesium
 n_segments = st.slider('Jumlah Segmen Trapesium', 1, 1000, 100)
 st.write('Jumlah Segmen Trapesium:', n_segments)
 
@@ -44,6 +48,6 @@ plt.grid(color='green', linestyle='-.', linewidth=.5)
 st.pyplot(fig)
 
 # Menampilkan integral trapesium
-integral_value = trapezoidal_integral(f, x_range[0], x_range[1], n_segments)
+integral_value = trapezoidal_integral(f, integral_range[0], integral_range[1], n_segments)
 st.write('### Nilai Integral menggunakan Metode Trapesium')
 st.write(integral_value)
