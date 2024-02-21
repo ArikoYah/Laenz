@@ -2,12 +2,14 @@ import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Definisi fungsi
+# Function definition
 def f(x):
+    """Defines the function f(x) = x^2 + 17x + 9."""
     return x**2 + 17*x + 9
 
-# Fungsi untuk menghitung integral menggunakan metode trapesium
+# Function to compute integral using trapezoidal method
 def trapezoidal_integral(f, a, b, n):
+    """Computes the integral of a function f over the interval [a, b] using the trapezoidal method."""
     h = (b - a) / n
     x = np.linspace(a, b, n+1)
     y = f(x)
@@ -16,43 +18,42 @@ def trapezoidal_integral(f, a, b, n):
 
 # Streamlit app
 st.title('Integral Trapesium untuk Fungsi f(x) = x^2 + 17x + 9')
+st.write('Gunakan slider di bawah untuk memilih rentang nilai x:')
 
-# Slider untuk memilih rentang nilai x
-st.write('### Nilai x')
+# Slider for selecting the range of x values
 x_range = st.slider('Rentang nilai x', -20.0, 5.0, (-20.0, 5.0))
 st.write('Rentang nilai x:', x_range)
 
-# Slider untuk memilih rentang integral
-st.write('### Rentang Integral')
-integral_range = st.slider('Rentang Integral', -1000.0, 1000.0, (-100.0, 100.0))
-st.write('Rentang Integral:', integral_range)
-
-# Slider untuk memilih jumlah segmen trapesium
-n_segments = st.slider('Jumlah Segmen Trapesium', 1, 1000, 100)
-st.write('Jumlah Segmen Trapesium:', n_segments)
-
-# Menghitung nilai fungsi untuk rentang yang dipilih
+# Calculate function values within the selected range
 x_vals = np.linspace(x_range[0], x_range[1], 1000)
 y_vals = f(x_vals)
 
-# Membuat plot dengan rentang yang dipilih
-fig, ax = plt.subplots(figsize=(16, 8))
-ax.plot(x_vals, y_vals, label='f(x) = x^2 + 17x + 9', color='b')
+# Calculate integral value using trapezoidal method
+integral_value = trapezoidal_integral(f, x_range[0], x_range[1], 1000)
 
-# Menyorot area di bawah kurva untuk rentang integral yang dipilih
-x_integral_vals = np.linspace(integral_range[0], integral_range[1], 1000)
-y_integral_vals = f(x_integral_vals)
-ax.fill_between(x_integral_vals, y_integral_vals, color='skyblue', alpha=0.3)
+# Plot the function and shaded region
+fig, ax = plt.subplots(2, 1, figsize=(16, 12), sharex=True)
 
-ax.set_ylabel("")
-ax.set_xlabel("x")
-ax.tick_params(axis='y', labelsize=20)
-ax.set_xticklabels(ax.get_xticklabels(), rotation=30, ha='right')
-ax.tick_params(axis='x', labelsize=15)
-plt.grid(color='green', linestyle='-.', linewidth=.5)
+# Plot the function
+ax[0].plot(x_vals, y_vals, label='f(x) = x^2 + 17x + 9', color='b')
+ax[0].fill_between(x_vals, y_vals, color='skyblue', alpha=0.3)  # Color the area under the curve
+ax[0].set_ylabel("f(x)")
+ax[0].tick_params(axis='y', labelsize=20)
+ax[0].grid(color='green', linestyle='-.', linewidth=.5)
+
+# Plot the integral approximation
+integral_approximation = np.linspace(x_range[0], x_range[1], 10)
+integral_approximation_y = f(integral_approximation)
+ax[1].plot(integral_approximation, integral_approximation_y, marker='o', linestyle='-', color='r')
+ax[1].fill_between(integral_approximation, 0, integral_approximation_y, color='salmon', alpha=0.3)  # Color the area under the curve
+ax[1].set_ylabel("Integral Approximation")
+ax[1].set_xlabel("x")
+ax[1].tick_params(axis='y', labelsize=20)
+ax[1].tick_params(axis='x', labelsize=15)
+ax[1].grid(color='green', linestyle='-.', linewidth=.5)
+
+plt.tight_layout()
 st.pyplot(fig)
 
-# Menampilkan integral trapesium
-integral_value = trapezoidal_integral(f, integral_range[0], integral_range[1], n_segments)
-st.write('### Nilai Integral menggunakan Metode Trapesium')
-st.write(integral_value)
+# Display integral value
+st.write('Nilai integral menggunakan metode trapesium:', integral_value)
