@@ -16,7 +16,7 @@ def trapezoidal_integral(f, a, b, n):
 
 # Streamlit app
 st.title('Integral Trapesium untuk Fungsi f(x) = x^2 + 17x + 9')
-st.write('Gunakan slider di bawah untuk memilih rentang nilai x:')
+st.write('Gunakan slider di bawah untuk memilih rentang nilai x.')
 
 # Slider untuk memilih rentang nilai x
 x_range = st.slider('Rentang nilai x', -20.0, 5.0, (-20.0, 5.0))
@@ -38,6 +38,6 @@ ax.tick_params(axis='x', labelsize=15)
 plt.grid(color='green', linestyle='-.', linewidth=.5)
 st.pyplot(fig)
 
-# Menampilkan integral trapesium
+# Menampilkan integral trapesium dengan dua desimal
 integral_value = trapezoidal_integral(f, x_range[0], x_range[1], 1000)
-st.write('Nilai integral menggunakan metode trapesium:', integral_value)
+st.write(f'Nilai integral menggunakan metode trapesium: {integral_value:.2f}')
