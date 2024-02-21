@@ -23,7 +23,7 @@ x_range = st.slider('Rentang nilai x', -20.0, 5.0, (-20.0, 5.0))
 st.write('Rentang nilai x:', x_range)
 
 # Menampilkan nilai rentang integral
-x_range = st.slider('Rentang nilai x', -20.0, 5.0, (-20.0, 5.0))
+x_range = st.slider('Rentang integral', -20.0, 5.0, (-20.0, 5.0))
 st.write('Rentang integral:', x_range[0], 'hingga', x_range[1])
 
 # Menghitung nilai fungsi untuk rentang yang dipilih
