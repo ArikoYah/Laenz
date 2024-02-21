@@ -18,9 +18,12 @@ def trapezoidal_integral(f, a, b, n):
 st.title('Integral Trapesium untuk Fungsi f(x) = x^2 + 17x + 9')
 
 # Slider untuk memilih rentang nilai x
-st.sidebar.header('Pilih Rentang Nilai X')
+st.sidebar.header('Pilih Rentang Nilai x')
 x_range = st.sidebar.slider('Rentang nilai x', -20.0, 5.0, (-20.0, 5.0))
-st.sidebar.write('Rentang nilai x:', x_range)
+
+# Slider untuk memilih nilai integral
+st.sidebar.header('Pilih Rentang Integral')
+integral_range = st.sidebar.slider('Rentang integral', -20.0, 5.0, (-20.0, 5.0))
 
 # Menghitung nilai fungsi untuk rentang yang dipilih
 x_vals = np.linspace(x_range[0], x_range[1], 1000)
@@ -29,7 +32,9 @@ y_vals = f(x_vals)
 # Membuat plot dengan rentang yang dipilih
 fig, ax = plt.subplots(figsize=(16, 8))
 ax.plot(x_vals, y_vals, label='f(x) = x^2 + 17x + 9', color='b')
-ax.fill_between(x_vals, y_vals, where=[(x >= x_range[0]) and (x <= x_range[1]) for x in x_vals], color='skyblue', alpha=0.3)  # Warna daerah di bawah kurva
+ax.fill_between(x_vals, y_vals, color='skyblue', alpha=0.3, where=(x_vals >= integral_range[0]) & (x_vals <= integral_range[1]))  # Arsiran daerah di bawah kurva sesuai dengan rentang integral
+ax.axvline(x=integral_range[0], color='red', linestyle='--')  # Garis vertikal menandai batas bawah rentang integral
+ax.axvline(x=integral_range[1], color='red', linestyle='--')  # Garis vertikal menandai batas atas rentang integral
 ax.set_ylabel("")
 ax.set_xlabel("x")
 ax.tick_params(axis='y', labelsize=20)
@@ -38,11 +43,9 @@ ax.tick_params(axis='x', labelsize=15)
 plt.grid(color='green', linestyle='-.', linewidth=.5)
 st.pyplot(fig)
 
-# Menampilkan slider untuk memilih rentang nilai integral
-st.sidebar.header('Pilih Rentang Nilai Integral')
-integral_range = st.sidebar.slider('Rentang nilai integral', -20.0, 5.0, (-20.0, 5.0))
-st.sidebar.write('Rentang nilai integral:', integral_range)
+# Menampilkan nilai rentang integral
+st.write('Rentang integral:', integral_range[0], 'hingga', integral_range[1])
 
-# Menampilkan nilai integral sesuai rentang yang dipilih
+# Menampilkan integral trapesium
 integral_value = trapezoidal_integral(f, integral_range[0], integral_range[1], 1000)
 st.write('Nilai integral menggunakan metode trapesium:', integral_value)
