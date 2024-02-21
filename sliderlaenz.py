@@ -16,14 +16,20 @@ def trapezoidal_integral(f, a, b, n):
 
 # Streamlit app
 st.title('Integral Trapesium untuk Fungsi f(x) = x^2 + 17x + 9')
-st.write('Gunakan slider di bawah untuk memilih rentang nilai x:')
 
 # Slider untuk memilih rentang nilai x
+st.write('### Nilai x')
 x_range = st.slider('Rentang nilai x', -20.0, 5.0, (-20.0, 5.0))
 st.write('Rentang nilai x:', x_range)
 
-# Menampilkan nilai rentang integral
-st.write('Rentang integral:', x_range[0], 'hingga', x_range[1])
+# Slider untuk memilih rentang integral
+st.write('### Rentang Integral')
+integral_range = st.slider('Rentang Integral', -1000.0, 1000.0, (-100.0, 100.0))
+st.write('Rentang Integral:', integral_range)
+
+# Slider untuk memilih jumlah segmen trapesium
+n_segments = st.slider('Jumlah Segmen Trapesium', 1, 1000, 100)
+st.write('Jumlah Segmen Trapesium:', n_segments)
 
 # Menghitung nilai fungsi untuk rentang yang dipilih
 x_vals = np.linspace(x_range[0], x_range[1], 1000)
@@ -32,7 +38,12 @@ y_vals = f(x_vals)
 # Membuat plot dengan rentang yang dipilih
 fig, ax = plt.subplots(figsize=(16, 8))
 ax.plot(x_vals, y_vals, label='f(x) = x^2 + 17x + 9', color='b')
-ax.fill_between(x_vals, y_vals, color='skyblue', alpha=0.3)  # Warna daerah di bawah kurva
+
+# Menyorot area di bawah kurva untuk rentang integral yang dipilih
+x_integral_vals = np.linspace(integral_range[0], integral_range[1], 1000)
+y_integral_vals = f(x_integral_vals)
+ax.fill_between(x_integral_vals, y_integral_vals, color='skyblue', alpha=0.3)
+
 ax.set_ylabel("")
 ax.set_xlabel("x")
 ax.tick_params(axis='y', labelsize=20)
@@ -42,5 +53,6 @@ plt.grid(color='green', linestyle='-.', linewidth=.5)
 st.pyplot(fig)
 
 # Menampilkan integral trapesium
-integral_value = trapezoidal_integral(f, x_range[0], x_range[1], 1000)
-st.write('Nilai integral menggunakan metode trapesium:', integral_value)
+integral_value = trapezoidal_integral(f, integral_range[0], integral_range[1], n_segments)
+st.write('### Nilai Integral menggunakan Metode Trapesium')
+st.write(integral_value)
