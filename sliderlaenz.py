@@ -12,7 +12,7 @@ u = np.sin(t)
 #st.write('nilai t:','\t)
 
 fig, ax = plt.subplots(figsize=(16, 8))
-ax.plot(x, y, label='sin(t)', color='b')
+ax.plot(t, u, label='sin(t)', color='b')
 ax.set_ylabel("")
 ax.set_xlabel("t")
 ax.tick_params(axis='y', labelsize=20)
