@@ -18,14 +18,9 @@ def trapezoidal_integral(f, a, b, n):
 st.title('Integral Trapesium untuk Fungsi f(x) = x^2 + 17x + 9')
 
 # Slider untuk memilih rentang nilai x
-st.write('### Nilai x')
-x_range = st.slider('Rentang nilai x', -20.0, 5.0, (-20.0, 5.0))
-st.write('Rentang nilai x:', x_range)
-
-# Slider untuk memilih jumlah segmen trapesium
-st.write('### Nilai Integral')
-n_segments = st.slider('Jumlah Segmen Trapesium', 1, 1000, 100)
-st.write('Jumlah Segmen Trapesium:', n_segments)
+st.sidebar.header('Pilih Rentang Nilai X')
+x_range = st.sidebar.slider('Rentang nilai x', -20.0, 5.0, (-20.0, 5.0))
+st.sidebar.write('Rentang nilai x:', x_range)
 
 # Menghitung nilai fungsi untuk rentang yang dipilih
 x_vals = np.linspace(x_range[0], x_range[1], 1000)
@@ -34,7 +29,7 @@ y_vals = f(x_vals)
 # Membuat plot dengan rentang yang dipilih
 fig, ax = plt.subplots(figsize=(16, 8))
 ax.plot(x_vals, y_vals, label='f(x) = x^2 + 17x + 9', color='b')
-ax.fill_between(x_vals, y_vals, color='skyblue', alpha=0.3)  # Warna daerah di bawah kurva
+ax.fill_between(x_vals, y_vals, where=[(x >= x_range[0]) and (x <= x_range[1]) for x in x_vals], color='skyblue', alpha=0.3)  # Warna daerah di bawah kurva
 ax.set_ylabel("")
 ax.set_xlabel("x")
 ax.tick_params(axis='y', labelsize=20)
@@ -43,7 +38,11 @@ ax.tick_params(axis='x', labelsize=15)
 plt.grid(color='green', linestyle='-.', linewidth=.5)
 st.pyplot(fig)
 
-# Menampilkan integral trapesium
-integral_value = trapezoidal_integral(f, x_range[0], x_range[1], n_segments)
-st.write('### Nilai Integral menggunakan Metode Trapesium')
-st.write(integral_value)
+# Menampilkan slider untuk memilih rentang nilai integral
+st.sidebar.header('Pilih Rentang Nilai Integral')
+integral_range = st.sidebar.slider('Rentang nilai integral', -20.0, 5.0, (-20.0, 5.0))
+st.sidebar.write('Rentang nilai integral:', integral_range)
+
+# Menampilkan nilai integral sesuai rentang yang dipilih
+integral_value = trapezoidal_integral(f, integral_range[0], integral_range[1], 1000)
+st.write('Nilai integral menggunakan metode trapesium:', integral_value)
