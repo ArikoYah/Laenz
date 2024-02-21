@@ -1,4 +1,18 @@
-# Streamlit app
+import streamlit as st
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Definisi fungsi
+def f(x):
+    return x**2 + 17*x + 9
+
+# Fungsi untuk menghitung integral menggunakan metode trapesium
+def trapezoidal_integral(f, a, b, n):
+    h = (b - a) / n
+    x = np.linspace(a, b, n+1)
+    y = f(x)
+    integral_value = h * (np.sum(y) - 0.5 * (y[0] + y[-1]))
+    return integral_value# Streamlit app
 st.title('Integral Trapesium untuk Fungsi f(x) = x^2 + 17x + 9')
 st.write('Gunakan slider di bawah untuk memilih rentang nilai x dan jumlah subinterval:')
 
