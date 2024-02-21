@@ -1,22 +1,31 @@
-import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
+import streamlit as st
 
-x = st.slider('pilih rentang', 0.0, 2.0, (.2, .5))
-st.write('nilai x:', x)
-y = st.slider('set nilai', 0.0,100.0, 25.0)
-st.write('nilai y:', y)
+# Definisi fungsi
+def f(x):
+    return x**2 + 17*x + 9
 
-t = np.linspace(x[0]*np.pi,x[1]*np.pi,100)
-u = np.sin(t)
-#st.write('nilai t:','\t)
+# Persiapan data untuk plotting
+x_vals = np.linspace(-20, 5, 1000)  # 1000 titik dari -20 sampai 5
 
-fig, ax = plt.subplots(figsize=(16, 8))
-ax.plot(t, u, label='sin(t)', color='b')
-ax.set_ylabel("")
-ax.set_xlabel("t")
-ax.tick_params(axis='y', labelsize=20)
-ax.set_xticklabels(ax.get_xticklabels(),rotation=30, ha='right')
-ax.tick_params(axis='x', labelsize=15)
-plt.grid(color='green',linestyle='-.', linewidth=.5)
-st.pyplot(fig)
+# Streamlit app
+st.title('Grafik Fungsi f(x) = x^2 + 17x + 9')
+st.write('Gunakan slider di bawah untuk memilih rentang nilai x:')
+
+# Slider untuk memilih rentang nilai x
+x_range = st.slider('Rentang nilai x', min_value=-20.0, max_value=5.0, value=(-20.0, 5.0))
+
+# Menghitung nilai fungsi untuk rentang yang dipilih
+y_vals = f(x_vals)
+
+# Membuat plot dengan rentang yang dipilih
+plt.plot(x_vals, y_vals)
+plt.xlim(x_range[0], x_range[1])
+plt.title('Grafik Fungsi f(x) = x^2 + 17x + 9')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.grid(True)
+
+# Menampilkan plot di Streamlit
+st.pyplot(plt)
